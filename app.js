@@ -42,6 +42,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 mongoose.connect(process.env.MONGO_URI).then(()=>console.log("DB Is Connected....")).catch((err)=>console.log(err));
 
 module.exports = app;

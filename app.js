@@ -25,6 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,10 +43,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-app.get('/health', (req, res) => {
-  res.status(200).send('OK');
 });
 
 mongoose.connect(process.env.MONGO_URI).then(()=>console.log("DB Is Connected....")).catch((err)=>console.log(err));

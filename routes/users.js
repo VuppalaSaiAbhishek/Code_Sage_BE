@@ -11,6 +11,7 @@ router.get('/history', async (req, res) => {
         const history = await Project.aggregate([
             { $sort: { createdAt: -1 } },
             { $limit: 10 },
+            { $sort: { createdAt: 1 } },
             {
                 $lookup: {
                     from: "chatmessages",    

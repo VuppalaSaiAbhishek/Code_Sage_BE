@@ -3,15 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var path = require('path');
+require('dotenv').config();
 var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { default: mongoose } = require('mongoose');
-const PORT = process.env.PORT || 3333;
 
-require('dotenv').config();
+
 var app = express();
 app.use(cors());
 
@@ -44,10 +42,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(PORT,()=>{
-  console.log(`Port is Running on ${PORT}...`);
-});
-
-mongoose.connect('mongodb+srv://vuppalaabhishek05_db_user:abcd123@cluster0.fyjuxso.mongodb.net/CodeSage=Cluster0').then(()=>console.log("DB Is Connected....")).catch((err)=>console.log(err));
+mongoose.connect(process.env.MONGO_URI).then(()=>console.log("DB Is Connected....")).catch((err)=>console.log(err));
 
 module.exports = app;

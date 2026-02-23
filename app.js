@@ -9,7 +9,9 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { default: mongoose } = require('mongoose');
+const PORT = process.env.PORT || 3333;
 
+require('dotenv').config();
 var app = express();
 app.use(cors());
 
@@ -42,8 +44,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3333,()=>{
-  console.log("Port is Running on 3333...");
+app.listen(PORT,()=>{
+  console.log(`Port is Running on ${PORT}...`);
 });
 
 mongoose.connect('mongodb+srv://vuppalaabhishek05_db_user:abcd123@cluster0.fyjuxso.mongodb.net/CodeSage=Cluster0').then(()=>console.log("DB Is Connected....")).catch((err)=>console.log(err));
